@@ -1,0 +1,101 @@
+ID_Etudiant,Nom,Prenom,Departement,Filière,Moyenne_Generale,Nombre_notes
+ETU1842,Evrard,Gabriel,Génie Informatique,Système Informatique,20.0,6
+ETU0619,Didier,Agnès,Génie Informatique,Génie Logiciel,20.0,6
+ETU1363,Dumas,Alexandria,Génie Électrique,Automatique et Contrôle,20.0,8
+ETU0816,Lenoir,Jacques,Génie Civil,Bâtiment et Travaux Publics,20.0,7
+ETU1118,Mary,Stéphanie,Génie Mécanique,Énergétique et Thermodynamique,20.0,7
+ETU1988,Renard,Olivie,Génie Mécanique,Énergétique et Thermodynamique,19.916666666666668,6
+ETU0947,Moreau,Jules,Génie Mécanique,Conception Mécanique,19.91111111111111,9
+ETU0907,Wagner,Jules,Génie Informatique,Logistique,19.857142857142858,7
+ETU0583,Marques,Christelle,Génie Civil,Génie Structural,19.814285714285713,7
+ETU0052,Jourdan,Susanne,Génie Civil,Génie Structural,19.811111111111114,9
+ETU1109,Morel,Bertrand,Génie Mécanique,Énergétique et Thermodynamique,19.75714285714286,7
+ETU1623,Petit,Roland,Génie Électrique,Énergies Renouvelables,19.7375,8
+ETU0015,Antoine,Hélène,Génie Informatique,Système et réseaux,19.72222222222222,9
+ETU0910,Vaillant,Anouk,Génie Mécanique,Conception Mécanique,19.67142857142857,7
+ETU0710,Morin,Pierre,Génie Mécanique,Conception Mécanique,19.65,8
+ETU1968,Chauveau,Dorothée,Génie Électrique,Automatique et Contrôle,19.65,8
+ETU1903,Peron,Valentine,Génie Mécanique,Énergétique et Thermodynamique,19.5875,8
+ETU0334,Philippe,Vincent,Génie Informatique,Système Informatique,19.571428571428573,7
+ETU1486,Olivier,Michelle,Génie Civil,Urbanisme et Transport,19.557142857142857,7
+ETU1369,Lejeune,Alice,Génie Électrique,Énergies Renouvelables,19.55,8
+ETU0321,Duval,Louise,Génie Mécanique,Robotique Avancée,19.5125,8
+ETU1344,Bernier,Marguerite,Génie Mécanique,Énergétique et Thermodynamique,19.475,8
+ETU1470,Albert,Marianne,Génie Civil,Bâtiment et Travaux Publics,19.45,8
+ETU0588,Grenier,Valentine,Génie Civil,Urbanisme et Transport,19.45,8
+ETU0988,Munoz,David,Génie Informatique,Génie Logiciel,19.400000000000002,7
+ETU1379,Roche,Jacques,Génie Civil,Urbanisme et Transport,19.3625,8
+ETU1505,Guyot,Nathalie,Génie Civil,Hydraulique et Environnement,19.357142857142858,7
+ETU0979,Philippe,Dominique,Génie Électrique,Électronique de Puissance,19.357142857142858,7
+ETU1765,Picard,Émilie,Génie Électrique,Réseaux Intelligents,19.3125,8
+ETU1014,Baron,Anastasie,Génie Informatique,Système Informatique,19.3,7
+ETU0527,Carre,Alexandrie,Génie Civil,Génie Structural,19.288888888888888,9
+ETU0663,Royer,Madeleine,Génie Électrique,Automatique et Contrôle,19.1875,8
+ETU0828,Bazin,Sébastien,Génie Civil,Géotechnique,19.1,8
+ETU0592,Allain,Adèle,Génie Civil,Géotechnique,19.1,9
+ETU0826,Lemaire,Isabelle,Génie Civil,Génie Structural,19.057142857142857,7
+ETU1973,Marie,Isaac,Génie Civil,Géotechnique,19.05,8
+ETU1611,Blin,Louis,Génie Mécanique,Production Industrielle,19.0375,8
+ETU1896,Leconte,Isabelle,Génie Informatique,IA et Big Data,19.02857142857143,7
+ETU1471,Roussel,Auguste,Génie Informatique,Génie Logiciel,18.957142857142856,7
+ETU1932,Lemaître,Dominique,Génie Électrique,Électronique de Puissance,18.95,8
+ETU0704,Gimenez,Louis,Génie Mécanique,Conception Mécanique,18.9,8
+ETU1965,Brunet,Virginie,Génie Mécanique,Production Industrielle,18.8625,8
+ETU0264,Vallée,Rémy,Génie Mécanique,Énergétique et Thermodynamique,18.82857142857143,7
+ETU1518,Lévy,Rémy,Génie Informatique,Système Informatique,18.82857142857143,7
+ETU0242,Rivière,Sébastien,Génie Informatique,Génie Logiciel,18.825,8
+ETU1539,Navarro,Thérèse,Génie Mécanique,Production Industrielle,18.8,8
+ETU1564,Hernandez,Andrée,Génie Informatique,Système et réseaux,18.74285714285714,7
+ETU0573,Gomez,Adrien,Génie Mécanique,Matériaux et Procédés,18.733333333333334,6
+ETU1060,Lévy,Nicolas,Génie Mécanique,Production Industrielle,18.714285714285715,7
+ETU0683,Verdier,Laurence,Génie Mécanique,Matériaux et Procédés,18.7,8
+ETU0403,Boulay,Théodore,Génie Civil,Urbanisme et Transport,18.7,7
+ETU0722,Blanchet,Cécile,Génie Mécanique,Matériaux et Procédés,18.7,6
+ETU1733,Clerc,Frédéric,Génie Informatique,Système Informatique,18.6625,8
+ETU1274,Masson,Daniel,Génie Mécanique,Conception Mécanique,18.642857142857142,7
+ETU0548,Chauvin,Bernadette,Génie Informatique,Système et réseaux,18.62857142857143,7
+ETU1530,Julien,Aimée,Génie Informatique,IA et Big Data,18.614285714285717,7
+ETU1291,Le Gall,Aimée,Génie Mécanique,Matériaux et Procédés,18.614285714285717,7
+ETU1491,Lucas,Isaac,Génie Mécanique,Production Industrielle,18.6,9
+ETU1573,Leblanc,Stéphanie,Génie Civil,Hydraulique et Environnement,18.599999999999998,7
+ETU1496,Berthelot,Paulette,Génie Mécanique,Énergétique et Thermodynamique,18.599999999999998,7
+ETU1933,Da Silva,Xavier,Génie Civil,Urbanisme et Transport,18.5875,8
+ETU0744,Legros,Anouk,Génie Informatique,Système et réseaux,18.575,8
+ETU1442,Lopes,Cécile,Génie Informatique,Logistique,18.55,8
+ETU1809,Laurent,Olivie,Génie Mécanique,Conception Mécanique,18.5,9
+ETU0349,Imbert,Marcelle,Génie Électrique,Automatique et Contrôle,18.425,8
+ETU1827,Caron,Pierre,Génie Informatique,Système et réseaux,18.357142857142858,7
+ETU0829,Peron,Jeannine,Génie Électrique,Réseaux Intelligents,18.3375,8
+ETU1963,Legros,Diane,Génie Informatique,Système Informatique,18.333333333333332,6
+ETU0997,Techer,Lucy,Génie Électrique,Électronique de Puissance,18.257142857142856,7
+ETU0205,Rivière,Valentine,Génie Civil,Géotechnique,18.233333333333334,6
+ETU0451,Chartier,Nath,Génie Électrique,Réseaux Intelligents,18.188888888888886,9
+ETU1149,Lefebvre,Bernadette,Génie Électrique,Électrotechnique,18.185714285714287,7
+ETU0031,Roussel,Hortense,Génie Civil,Hydraulique et Environnement,18.174999999999997,8
+ETU0859,Da Costa,René,Génie Électrique,Énergies Renouvelables,18.166666666666668,6
+ETU1771,Vaillant,Léon,Génie Mécanique,Robotique Avancée,18.114285714285717,7
+ETU1091,Faivre,Matthieu,Génie Civil,Génie Structural,18.071428571428573,7
+ETU0940,Marchand,Laurence,Génie Informatique,Génie Logiciel,18.05,8
+ETU0071,Barbe,Tristan,Génie Mécanique,Conception Mécanique,18.014285714285712,7
+ETU1168,Le Goff,Renée,Génie Informatique,Système Informatique,18.0,8
+ETU0166,Jacques,Claude,Génie Informatique,Logistique,17.975,8
+ETU1596,Lebon,Anne,Génie Mécanique,Conception Mécanique,17.966666666666665,6
+ETU0487,Lecomte,Adrien,Génie Informatique,IA et Big Data,17.966666666666665,9
+ETU1515,Charles,Maurice,Génie Électrique,Électrotechnique,17.942857142857143,7
+ETU1074,Alexandre,Aurélie,Génie Informatique,Système Informatique,17.928571428571427,7
+ETU1032,Alves,Hélène,Génie Civil,Génie Structural,17.8875,8
+ETU1101,Voisin,Luc,Génie Mécanique,Robotique Avancée,17.866666666666667,9
+ETU0364,Masson,David,Génie Informatique,Logistique,17.857142857142858,7
+ETU1482,Bousquet,Michel,Génie Civil,Urbanisme et Transport,17.85,8
+ETU1071,Parent,Denis,Génie Informatique,Système et réseaux,17.842857142857145,7
+ETU0690,Guérin,Joséphine,Génie Civil,Hydraulique et Environnement,17.8,8
+ETU1468,Mendès,Antoinette,Génie Civil,Géotechnique,17.783333333333335,6
+ETU0815,Lombard,Alexandrie,Génie Informatique,Système Informatique,17.757142857142856,7
+ETU0218,Dupuis,Susan,Génie Informatique,IA et Big Data,17.757142857142856,7
+ETU0042,Picard,Pénélope,Génie Civil,Génie Structural,17.733333333333334,9
+ETU1808,Thibault,Gilles,Génie Électrique,Électronique de Puissance,17.733333333333334,9
+ETU1362,Besnard,Étienne,Génie Civil,Géotechnique,17.728571428571428,7
+ETU1745,Carlier,Timothée,Génie Mécanique,Production Industrielle,17.728571428571428,7
+ETU1025,Gros,Suzanne,Génie Électrique,Automatique et Contrôle,17.7,6
+ETU0406,Nguyen,Marianne,Génie Mécanique,Production Industrielle,17.6125,8
+ETU1841,Rey,Édith,Génie Mécanique,Conception Mécanique,17.6,9

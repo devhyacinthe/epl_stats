@@ -1,0 +1,181 @@
+Departement,Filiere,Code_UE,Nom_UE,Code_Matiere,Matiere,Ordre_Matiere
+Génie Informatique,Génie Logiciel,INF2101,Algorithmique Avancée,1INF2101,Structures de données avancées,1
+Génie Informatique,Génie Logiciel,INF2101,Algorithmique Avancée,2INF2101,Analyse d'algorithmes,2
+Génie Informatique,Génie Logiciel,INF2101,Algorithmique Avancée,3INF2101,Graphes et optimisation,3
+Génie Informatique,Génie Logiciel,INF2102,Développement Logiciel,1INF2102,Design Patterns,1
+Génie Informatique,Génie Logiciel,INF2102,Développement Logiciel,2INF2102,Architecture logicielle,2
+Génie Informatique,Génie Logiciel,INF2102,Développement Logiciel,3INF2102,Tests unitaires et TDD,3
+Génie Informatique,Génie Logiciel,INF2103,Ingénierie des SI,1INF2103,UML et modélisation,1
+Génie Informatique,Génie Logiciel,INF2103,Ingénierie des SI,2INF2103,Cycle de vie des projets,2
+Génie Informatique,Génie Logiciel,INF2103,Ingénierie des SI,3INF2103,Gestion des exigences,3
+Génie Informatique,Système et réseaux,INF2201,Réseaux et Communications,1INF2201,TCP/IP avancé,1
+Génie Informatique,Système et réseaux,INF2201,Réseaux et Communications,2INF2201,Routage et commutation,2
+Génie Informatique,Système et réseaux,INF2201,Réseaux et Communications,3INF2201,Réseaux sans fil,3
+Génie Informatique,Système et réseaux,INF2202,Sécurité Informatique,1INF2202,Cryptographie appliquée,1
+Génie Informatique,Système et réseaux,INF2202,Sécurité Informatique,2INF2202,Pare-feu et IDS/IPS,2
+Génie Informatique,Système et réseaux,INF2202,Sécurité Informatique,3INF2202,Audit de sécurité,3
+Génie Informatique,Système et réseaux,INF2203,Administration Système,1INF2203,Linux serveur,1
+Génie Informatique,Système et réseaux,INF2203,Administration Système,2INF2203,Scripting shell,2
+Génie Informatique,Système et réseaux,INF2203,Administration Système,3INF2203,Virtualisation et conteneurs,3
+Génie Informatique,Système Informatique,INF2301,Architecture Matérielle,1INF2301,Microprocesseurs,1
+Génie Informatique,Système Informatique,INF2301,Architecture Matérielle,2INF2301,Systèmes embarqués,2
+Génie Informatique,Système Informatique,INF2301,Architecture Matérielle,3INF2301,Architecture parallèle,3
+Génie Informatique,Système Informatique,INF2302,Systèmes d'Exploitation,1INF2302,Noyau et drivers,1
+Génie Informatique,Système Informatique,INF2302,Systèmes d'Exploitation,2INF2302,Gestion de la mémoire,2
+Génie Informatique,Système Informatique,INF2302,Systèmes d'Exploitation,3INF2302,Ordonnancement,3
+Génie Informatique,Système Informatique,INF2303,Robotique et Automatisme,1INF2303,Capteurs et actionneurs,1
+Génie Informatique,Système Informatique,INF2303,Robotique et Automatisme,2INF2303,Asservissements,2
+Génie Informatique,Système Informatique,INF2303,Robotique et Automatisme,3INF2303,Vision par ordinateur,3
+Génie Informatique,IA et Big Data,INF2401,Intelligence Artificielle,1INF2401,Apprentissage automatique,1
+Génie Informatique,IA et Big Data,INF2401,Intelligence Artificielle,2INF2401,Réseaux de neurones,2
+Génie Informatique,IA et Big Data,INF2401,Intelligence Artificielle,3INF2401,Traitement du langage naturel,3
+Génie Informatique,IA et Big Data,INF2402,Data Science,1INF2402,Statistiques avancées,1
+Génie Informatique,IA et Big Data,INF2402,Data Science,2INF2402,Visualisation de données,2
+Génie Informatique,IA et Big Data,INF2402,Data Science,3INF2402,Data Mining,3
+Génie Informatique,IA et Big Data,INF2403,Big Data Technologies,1INF2403,Hadoop et Spark,1
+Génie Informatique,IA et Big Data,INF2403,Big Data Technologies,2INF2403,Bases NoSQL,2
+Génie Informatique,IA et Big Data,INF2403,Big Data Technologies,3INF2403,Traitement en streaming,3
+Génie Informatique,Logistique,INF2501,Supply Chain Management,1INF2501,Gestion des stocks,1
+Génie Informatique,Logistique,INF2501,Supply Chain Management,2INF2501,Planification logistique,2
+Génie Informatique,Logistique,INF2501,Supply Chain Management,3INF2501,Transport et distribution,3
+Génie Informatique,Logistique,INF2502,Systèmes d'Information Logistique,1INF2502,ERP logistique,1
+Génie Informatique,Logistique,INF2502,Systèmes d'Information Logistique,2INF2502,Traçabilité RFID,2
+Génie Informatique,Logistique,INF2502,Systèmes d'Information Logistique,3INF2502,Optimisation des flux,3
+Génie Informatique,Logistique,INF2503,E-logistique,1INF2503,E-commerce et logistique,1
+Génie Informatique,Logistique,INF2503,E-logistique,2INF2503,Plateformes digitales,2
+Génie Informatique,Logistique,INF2503,E-logistique,3INF2503,Last mile delivery,3
+Génie Électrique,Électrotechnique,ELE2101,Machines Électriques,1ELE2101,Machines à courant continu,1
+Génie Électrique,Électrotechnique,ELE2101,Machines Électriques,2ELE2101,Machines synchrones,2
+Génie Électrique,Électrotechnique,ELE2101,Machines Électriques,3ELE2101,Machines asynchrones,3
+Génie Électrique,Électrotechnique,ELE2102,Conversion d'Énergie,1ELE2102,Redresseurs et onduleurs,1
+Génie Électrique,Électrotechnique,ELE2102,Conversion d'Énergie,2ELE2102,Convertisseurs DC-DC,2
+Génie Électrique,Électrotechnique,ELE2102,Conversion d'Énergie,3ELE2102,Alimentations à découpage,3
+Génie Électrique,Électrotechnique,ELE2103,Diagnostic des Systèmes,1ELE2103,Analyse vibratoire,1
+Génie Électrique,Électrotechnique,ELE2103,Diagnostic des Systèmes,2ELE2103,Thermographie infrarouge,2
+Génie Électrique,Électrotechnique,ELE2103,Diagnostic des Systèmes,3ELE2103,Analyse des courants,3
+Génie Électrique,Automatique et Contrôle,ELE2201,Automatismes Industriels,1ELE2201,GRAFCET et SFC,1
+Génie Électrique,Automatique et Contrôle,ELE2201,Automatismes Industriels,2ELE2201,API Programmable,2
+Génie Électrique,Automatique et Contrôle,ELE2201,Automatismes Industriels,3ELE2201,Bus de terrain,3
+Génie Électrique,Automatique et Contrôle,ELE2202,Régulation Avancée,1ELE2202,PID adaptatif,1
+Génie Électrique,Automatique et Contrôle,ELE2202,Régulation Avancée,2ELE2202,Commande prédictive,2
+Génie Électrique,Automatique et Contrôle,ELE2202,Régulation Avancée,3ELE2202,Observation d'état,3
+Génie Électrique,Automatique et Contrôle,ELE2203,Systèmes Embarqués,1ELE2203,Microcontrôleurs,1
+Génie Électrique,Automatique et Contrôle,ELE2203,Systèmes Embarqués,2ELE2203,Traitement du signal,2
+Génie Électrique,Automatique et Contrôle,ELE2203,Systèmes Embarqués,3ELE2203,Temps réel dur,3
+Génie Électrique,Énergies Renouvelables,ELE2301,Solaire Photovoltaïque,1ELE2301,Cellules PV,1
+Génie Électrique,Énergies Renouvelables,ELE2301,Solaire Photovoltaïque,2ELE2301,Onduleurs solaires,2
+Génie Électrique,Énergies Renouvelables,ELE2301,Solaire Photovoltaïque,3ELE2301,Dimensionnement de centrales,3
+Génie Électrique,Énergies Renouvelables,ELE2302,Éolien,1ELE2302,Aérogénérateurs,1
+Génie Électrique,Énergies Renouvelables,ELE2302,Éolien,2ELE2302,Conversion éolienne,2
+Génie Électrique,Énergies Renouvelables,ELE2302,Éolien,3ELE2302,Intégration au réseau,3
+Génie Électrique,Énergies Renouvelables,ELE2303,Stockage d'Énergie,1ELE2303,Batteries Li-ion,1
+Génie Électrique,Énergies Renouvelables,ELE2303,Stockage d'Énergie,2ELE2303,Supercondensateurs,2
+Génie Électrique,Énergies Renouvelables,ELE2303,Stockage d'Énergie,3ELE2303,Power-to-Gas,3
+Génie Électrique,Électronique de Puissance,ELE2401,Convertisseurs Statiques,1ELE2401,Hacheurs série/parallèle,1
+Génie Électrique,Électronique de Puissance,ELE2401,Convertisseurs Statiques,2ELE2401,Onduleurs MLI,2
+Génie Électrique,Électronique de Puissance,ELE2401,Convertisseurs Statiques,3ELE2401,Gradateurs,3
+Génie Électrique,Électronique de Puissance,ELE2402,Compatibilité Électromagnétique,1ELE2402,Perturbations conduites,1
+Génie Électrique,Électronique de Puissance,ELE2402,Compatibilité Électromagnétique,2ELE2402,Rayonnements,2
+Génie Électrique,Électronique de Puissance,ELE2402,Compatibilité Électromagnétique,3ELE2402,Blindage et filtrage,3
+Génie Électrique,Électronique de Puissance,ELE2403,Thermique des Composants,1ELE2403,Dissipation thermique,1
+Génie Électrique,Électronique de Puissance,ELE2403,Thermique des Composants,2ELE2403,Refroidissement actif,2
+Génie Électrique,Électronique de Puissance,ELE2403,Thermique des Composants,3ELE2403,Matériaux thermiques,3
+Génie Électrique,Réseaux Intelligents,ELE2501,Smart Grids,1ELE2501,Compteurs intelligents,1
+Génie Électrique,Réseaux Intelligents,ELE2501,Smart Grids,2ELE2501,Gestion de la demande,2
+Génie Électrique,Réseaux Intelligents,ELE2501,Smart Grids,3ELE2501,Micro-réseaux,3
+Génie Électrique,Réseaux Intelligents,ELE2502,Protection des Réseaux,1ELE2502,Relais numériques,1
+Génie Électrique,Réseaux Intelligents,ELE2502,Protection des Réseaux,2ELE2502,Coordination des protections,2
+Génie Électrique,Réseaux Intelligents,ELE2502,Protection des Réseaux,3ELE2502,Stabilité dynamique,3
+Génie Électrique,Réseaux Intelligents,ELE2503,Qualité de l'Énergie,1ELE2503,Harmoniques,1
+Génie Électrique,Réseaux Intelligents,ELE2503,Qualité de l'Énergie,2ELE2503,Fluctuations de tension,2
+Génie Électrique,Réseaux Intelligents,ELE2503,Qualité de l'Énergie,3ELE2503,Correcteurs actifs,3
+Génie Mécanique,Conception Mécanique,MEC2101,CAO/DAO Avancé,1MEC2101,Modélisation paramétrique,1
+Génie Mécanique,Conception Mécanique,MEC2101,CAO/DAO Avancé,2MEC2101,Assemblages complexes,2
+Génie Mécanique,Conception Mécanique,MEC2101,CAO/DAO Avancé,3MEC2101,Gestion des contraintes,3
+Génie Mécanique,Conception Mécanique,MEC2102,Calcul des Structures,1MEC2102,Éléments finis avancés,1
+Génie Mécanique,Conception Mécanique,MEC2102,Calcul des Structures,2MEC2102,Fatigue des matériaux,2
+Génie Mécanique,Conception Mécanique,MEC2102,Calcul des Structures,3MEC2102,Dynamique des structures,3
+Génie Mécanique,Conception Mécanique,MEC2103,Tolérancement,1MEC2103,Chaînes de cotes,1
+Génie Mécanique,Conception Mécanique,MEC2103,Tolérancement,2MEC2103,Statistiques de fabrication,2
+Génie Mécanique,Conception Mécanique,MEC2103,Tolérancement,3MEC2103,Métrologie 3D,3
+Génie Mécanique,Énergétique et Thermodynamique,MEC2201,Machines Thermiques,1MEC2201,Turbines à gaz,1
+Génie Mécanique,Énergétique et Thermodynamique,MEC2201,Machines Thermiques,2MEC2201,Moteurs Diesel,2
+Génie Mécanique,Énergétique et Thermodynamique,MEC2201,Machines Thermiques,3MEC2201,Cycle de Rankine,3
+Génie Mécanique,Énergétique et Thermodynamique,MEC2202,Transferts Thermiques,1MEC2202,Convection forcée/naturelle,1
+Génie Mécanique,Énergétique et Thermodynamique,MEC2202,Transferts Thermiques,2MEC2202,Rayonnement thermique,2
+Génie Mécanique,Énergétique et Thermodynamique,MEC2202,Transferts Thermiques,3MEC2202,Échangeurs de chaleur,3
+Génie Mécanique,Énergétique et Thermodynamique,MEC2203,Énergies Nouvelles,1MEC2203,Piles à combustible,1
+Génie Mécanique,Énergétique et Thermodynamique,MEC2203,Énergies Nouvelles,2MEC2203,Cogénération,2
+Génie Mécanique,Énergétique et Thermodynamique,MEC2203,Énergies Nouvelles,3MEC2203,Valorisation énergétique,3
+Génie Mécanique,Production Industrielle,MEC2301,Usinage CNC,1MEC2301,Programmation ISO,1
+Génie Mécanique,Production Industrielle,MEC2301,Usinage CNC,2MEC2301,Simulation d'usinage,2
+Génie Mécanique,Production Industrielle,MEC2301,Usinage CNC,3MEC2301,Optimisation de trajectoires,3
+Génie Mécanique,Production Industrielle,MEC2302,Fabrication Additive,1MEC2302,Impression 3D métal,1
+Génie Mécanique,Production Industrielle,MEC2302,Fabrication Additive,2MEC2302,SLA et SLS,2
+Génie Mécanique,Production Industrielle,MEC2302,Fabrication Additive,3MEC2302,Contrôle qualité AM,3
+Génie Mécanique,Production Industrielle,MEC2303,Métrologie Industrielle,1MEC2303,Machines à mesurer,1
+Génie Mécanique,Production Industrielle,MEC2303,Métrologie Industrielle,2MEC2303,Rugosimètres,2
+Génie Mécanique,Production Industrielle,MEC2303,Métrologie Industrielle,3MEC2303,Projecteurs de profils,3
+Génie Mécanique,Matériaux et Procédés,MEC2401,Science des Matériaux,1MEC2401,Diagrammes de phases,1
+Génie Mécanique,Matériaux et Procédés,MEC2401,Science des Matériaux,2MEC2401,Transformations structurales,2
+Génie Mécanique,Matériaux et Procédés,MEC2401,Science des Matériaux,3MEC2401,Propriétés mécaniques,3
+Génie Mécanique,Matériaux et Procédés,MEC2402,Procédés de Fabrication,1MEC2402,Injection plastique,1
+Génie Mécanique,Matériaux et Procédés,MEC2402,Procédés de Fabrication,2MEC2402,Emboutissage,2
+Génie Mécanique,Matériaux et Procédés,MEC2402,Procédés de Fabrication,3MEC2402,Frittage,3
+Génie Mécanique,Matériaux et Procédés,MEC2403,Traitements de Surface,1MEC2403,Traitements thermiques,1
+Génie Mécanique,Matériaux et Procédés,MEC2403,Traitements de Surface,2MEC2403,Revêtements PVD/CVD,2
+Génie Mécanique,Matériaux et Procédés,MEC2403,Traitements de Surface,3MEC2403,Nitruration,3
+Génie Mécanique,Robotique Avancée,MEC2501,Cinématique et Dynamique,1MEC2501,Modèles géométriques,1
+Génie Mécanique,Robotique Avancée,MEC2501,Cinématique et Dynamique,2MEC2501,Jacobien,2
+Génie Mécanique,Robotique Avancée,MEC2501,Cinématique et Dynamique,3MEC2501,Dynamique inverse,3
+Génie Mécanique,Robotique Avancée,MEC2502,Commande Robotique,1MEC2502,Asservissement numérique,1
+Génie Mécanique,Robotique Avancée,MEC2502,Commande Robotique,2MEC2502,Planification de trajectoires,2
+Génie Mécanique,Robotique Avancée,MEC2502,Commande Robotique,3MEC2502,Force control,3
+Génie Mécanique,Robotique Avancée,MEC2503,Vision Industrielle,1MEC2503,Traitement d'images,1
+Génie Mécanique,Robotique Avancée,MEC2503,Vision Industrielle,2MEC2503,Reconnaissance de formes,2
+Génie Mécanique,Robotique Avancée,MEC2503,Vision Industrielle,3MEC2503,Guidage visuel,3
+Génie Civil,Bâtiment et Travaux Publics,CIV2101,Technologie du Bâtiment,1CIV2101,Gros œuvre,1
+Génie Civil,Bâtiment et Travaux Publics,CIV2101,Technologie du Bâtiment,2CIV2101,Second œuvre,2
+Génie Civil,Bâtiment et Travaux Publics,CIV2101,Technologie du Bâtiment,3CIV2101,Étanchéité toiture,3
+Génie Civil,Bâtiment et Travaux Publics,CIV2102,Matériaux de Construction,1CIV2102,Béton haute performance,1
+Génie Civil,Bâtiment et Travaux Publics,CIV2102,Matériaux de Construction,2CIV2102,Bois lamellé-collé,2
+Génie Civil,Bâtiment et Travaux Publics,CIV2102,Matériaux de Construction,3CIV2102,Matériaux composites,3
+Génie Civil,Bâtiment et Travaux Publics,CIV2103,Sécurité Chantier,1CIV2103,Étude de sécurité,1
+Génie Civil,Bâtiment et Travaux Publics,CIV2103,Sécurité Chantier,2CIV2103,Plans de prévention,2
+Génie Civil,Bâtiment et Travaux Publics,CIV2103,Sécurité Chantier,3CIV2103,Coordination SPS,3
+Génie Civil,Génie Structural,CIV2201,Béton Armé et Précontraint,1CIV2201,Calcul des sections,1
+Génie Civil,Génie Structural,CIV2201,Béton Armé et Précontraint,2CIV2201,Dispositions constructives,2
+Génie Civil,Génie Structural,CIV2201,Béton Armé et Précontraint,3CIV2201,Vérification ELU/ELS,3
+Génie Civil,Génie Structural,CIV2202,Construction Métallique,1CIV2202,Assemblages soudés/boulonnés,1
+Génie Civil,Génie Structural,CIV2202,Construction Métallique,2CIV2202,Stabilité des structures,2
+Génie Civil,Génie Structural,CIV2202,Construction Métallique,3CIV2202,Eurocodes,3
+Génie Civil,Génie Structural,CIV2203,Dynamique des Structures,1CIV2203,Analyse modale,1
+Génie Civil,Génie Structural,CIV2203,Dynamique des Structures,2CIV2203,Sismique,2
+Génie Civil,Génie Structural,CIV2203,Dynamique des Structures,3CIV2203,Vibrations induites,3
+Génie Civil,Géotechnique,CIV2301,Mécanique des Sols,1CIV2301,Contraintes efficaces,1
+Génie Civil,Géotechnique,CIV2301,Mécanique des Sols,2CIV2301,Tassements,2
+Génie Civil,Géotechnique,CIV2301,Mécanique des Sols,3CIV2301,Rupture des sols,3
+Génie Civil,Géotechnique,CIV2302,Fondations Spéciales,1CIV2302,Pieux forés,1
+Génie Civil,Géotechnique,CIV2302,Fondations Spéciales,2CIV2302,Parois moulées,2
+Génie Civil,Géotechnique,CIV2302,Fondations Spéciales,3CIV2302,Inclusions rigides,3
+Génie Civil,Géotechnique,CIV2303,Ouvrages Souterrains,1CIV2303,Tunnels,1
+Génie Civil,Géotechnique,CIV2303,Ouvrages Souterrains,2CIV2303,Galeries,2
+Génie Civil,Géotechnique,CIV2303,Ouvrages Souterrains,3CIV2303,Soutènements,3
+Génie Civil,Hydraulique et Environnement,CIV2401,Hydrologie,1CIV2401,Bilans hydriques,1
+Génie Civil,Hydraulique et Environnement,CIV2401,Hydrologie,2CIV2401,Crues décennales,2
+Génie Civil,Hydraulique et Environnement,CIV2401,Hydrologie,3CIV2401,Modélisation pluie-débit,3
+Génie Civil,Hydraulique et Environnement,CIV2402,Traitement des Eaux,1CIV2402,Potabilisation,1
+Génie Civil,Hydraulique et Environnement,CIV2402,Traitement des Eaux,2CIV2402,Épuration des eaux usées,2
+Génie Civil,Hydraulique et Environnement,CIV2402,Traitement des Eaux,3CIV2402,Déphosphatation,3
+Génie Civil,Hydraulique et Environnement,CIV2403,Génie de l'Environnement,1CIV2403,Études d'impact,1
+Génie Civil,Hydraulique et Environnement,CIV2403,Génie de l'Environnement,2CIV2403,Gestion des déchets,2
+Génie Civil,Hydraulique et Environnement,CIV2403,Génie de l'Environnement,3CIV2403,Dépollution des sols,3
+Génie Civil,Urbanisme et Transport,CIV2501,Aménagement du Territoire,1CIV2501,Plans locaux d'urbanisme,1
+Génie Civil,Urbanisme et Transport,CIV2501,Aménagement du Territoire,2CIV2501,Zones d'aménagement concerté,2
+Génie Civil,Urbanisme et Transport,CIV2501,Aménagement du Territoire,3CIV2501,Écoquartiers,3
+Génie Civil,Urbanisme et Transport,CIV2502,Infrastructures Routières,1CIV2502,Géométrie des routes,1
+Génie Civil,Urbanisme et Transport,CIV2502,Infrastructures Routières,2CIV2502,Couches de chaussée,2
+Génie Civil,Urbanisme et Transport,CIV2502,Infrastructures Routières,3CIV2502,Signalisation,3
+Génie Civil,Urbanisme et Transport,CIV2503,Ouvrages d'Art,1CIV2503,Ponts en arc,1
+Génie Civil,Urbanisme et Transport,CIV2503,Ouvrages d'Art,2CIV2503,Ponts à haubans,2
+Génie Civil,Urbanisme et Transport,CIV2503,Ouvrages d'Art,3CIV2503,Viaducs,3
