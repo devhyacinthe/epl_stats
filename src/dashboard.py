@@ -1,4 +1,3 @@
-# src/dashboard.py
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -13,12 +12,40 @@ import time
 
 sys.stdout.reconfigure(encoding='utf-8')
 
+# Déterminer si on est en local ou sur le cloud
+IS_CLOUD = 'STREAMLIT_CLOUD' in os.environ or 'STREAMLIT_SHARING' in os.environ
+
 # Ajouter le chemin du projet
 sys.path.append(str(Path(__file__).parent.parent))
 
 from src.data_loader import DataLoader
 from src.data_analyzer import DataAnalyzer
 from src.data_visualizer import DataVisualizer
+
+# --- FONCTIONS DE CHARGEMENT OPTIMISÉES ---
+@st.cache_data(ttl=3600, show_spinner=False)
+def load_default_data():
+    """Charge les données par défaut avec cache"""
+    try:
+        if IS_CLOUD:
+            # Sur le cloud, on peut charger depuis une URL GitHub
+            data_url = "https://raw.githubusercontent.com/votre-username/votre-repo/main/data/raw/notes_epl.csv"
+            df = pd.read_csv(data_url)
+        else:
+            # En local, charger depuis le fichier
+            data_path = Path(__file__).parent.parent / "data" / "raw" / "notes_epl.csv"
+            df = pd.read_csv(data_path)
+        
+        # Nettoyer les données
+        loader = DataLoader(None)
+        loader.df = df
+        df = loader.clean_data()
+        
+        return df
+    except Exception as e:
+        st.error(f"❌ Erreur de chargement: {str(e)}")
+        return None
+
 
 class StreamlitDashboard:
     def __init__(self):
@@ -55,7 +82,10 @@ class StreamlitDashboard:
             # Afficher un spinner pendant le chargement
             with st.spinner(f"Chargement de {file_name}..."):
                 data_loader = DataLoader(file_path)
-                df = data_loader.load_data()
+                if IS_CLOUD:
+                    df = load_default_data()
+                else:
+                    df = data_loader.load_data()
                 
                 if df is not None:
                     df = data_loader.clean_data()
