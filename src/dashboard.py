@@ -118,7 +118,7 @@ class StreamlitDashboard:
     
     def show_file_uploader(self):
         """Affiche l'interface de téléchargement de fichier"""
-        st.title("📤 Téléchargement de Fichiers CSV")
+        st.title("📤 Téléchargement de Fichier CSV")
         st.markdown("---")
         
         # Créer deux onglets pour les options
