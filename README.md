@@ -50,11 +50,3 @@ Je génère la structure du dataset
             2. 'random' : Distribution uniforme complètement aléatoire
             3. 'seasonal' : Variation selon la 'saison' (position de l'étudiant)
             4. 'mixed' : Combinaison des méthodes
-
-#### LE fichier data_analyzer
-
-Il produit toutes les statistiques dans mes données
-
-
-- Dashboard.py et comprendre tous le code
-- Tous les fichiers .py dans src

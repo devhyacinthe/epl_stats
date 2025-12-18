@@ -29,7 +29,7 @@ def load_default_data():
     try:
         if IS_CLOUD:
             # Sur le cloud, on peut charger depuis une URL GitHub
-            data_url = "https://raw.githubusercontent.com/votre-username/votre-repo/main/data/raw/notes_epl.csv"
+            data_url = "https://raw.githubusercontent.com/devhyacinthe/eplstats/main/data/raw/notes_epl.csv"
             df = pd.read_csv(data_url)
         else:
             # En local, charger depuis le fichier
