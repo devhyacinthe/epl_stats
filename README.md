@@ -38,10 +38,6 @@ streamlit run src/dashboard.py
 pip install --upgrade kaleido
 
 
-
-### Lire
-
-
 #### Le fichier data_generator.py
 
 Je génère la structure du dataset
@@ -50,3 +46,7 @@ Je génère la structure du dataset
             2. 'random' : Distribution uniforme complètement aléatoire
             3. 'seasonal' : Variation selon la 'saison' (position de l'étudiant)
             4. 'mixed' : Combinaison des méthodes
+
+## Lien de l'application:
+
+[Dashboard](https://eplstats.streamlit.app/)
