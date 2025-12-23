@@ -9,6 +9,7 @@ import sys
 import tempfile
 import os
 import time
+from fpdf import FPDF
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -394,7 +395,7 @@ class StreamlitDashboard:
         
         # Layout principal avec tabs
         tab_names = ["📊 Vue d'ensemble", "📈 Analyses détaillées", "🏆 Classements", 
-                    "📋 Données brutes", "🔍 Qualité des données", "💾 Export"]
+                    "🏫 Enseignants", "📋 Données brutes", "🔍 Qualité des données", "💾 Export"]
         
         # Vérifier quelles onglets sont disponibles
         available_tabs = []
@@ -411,12 +412,14 @@ class StreamlitDashboard:
                 elif i == 1:
                     self._show_analysis_tab()
                 elif i == 2:
-                    self._show_ranking_tab()
+                    self._show_ranking_tab(filtered_df)
                 elif i == 3:
-                    self._show_raw_data_tab(filtered_df)
+                    self._show_teachers_tab(filtered_df)
                 elif i == 4:
-                    self._show_quality_tab()
+                    self._show_raw_data_tab(filtered_df)
                 elif i == 5:
+                    self._show_quality_tab()
+                elif i == 6:
                     self._show_export_tab(filtered_df)
     
     # ... (les autres méthodes restent les mêmes: _show_overview_tab, _show_analysis_tab, etc.)
@@ -516,22 +519,12 @@ class StreamlitDashboard:
         ))
         
         # Graphiques supplémentaires
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.subheader(f"Moyennes par {analysis_type.lower()}")
-            fig = px.bar(comparison, x=comparison.index, y='Moyenne_Finale',
-                        title=f'Moyennes finales par {analysis_type.lower()}')
-            st.plotly_chart(fig, use_container_width=True)
-        
-        with col2:
-            st.subheader(f"Corrélation Devoir vs Examen")
-            fig = px.scatter(self.df, x='Note_Devoir', y='Note_Examen',
-                           color=selected_column,
-                           title='Relation entre notes de devoir et examen')
-            st.plotly_chart(fig, use_container_width=True)
+        st.subheader(f"Moyennes par {analysis_type.lower()}")
+        fig = px.bar(comparison, x=comparison.index, y='Moyenne_Finale',
+                    title=f'Moyennes finales par {analysis_type.lower()}')
+        st.plotly_chart(fig, use_container_width=True)
     
-    def _show_ranking_tab(self):
+    def _show_ranking_tab(self, filtered_df):
         """Affiche l'onglet des classements"""
         st.header("Classements")
         
@@ -539,17 +532,140 @@ class StreamlitDashboard:
         
         # Classement des étudiants
         st.subheader(f"Top {top_n} étudiants")
-        ranking = self.analyzer.get_student_ranking(top_n)
+        # Créer un analyzer temporaire avec les données filtrées
+        from src.data_analyzer import DataAnalyzer
+        temp_analyzer = DataAnalyzer(filtered_df)
+        ranking = temp_analyzer.get_student_ranking(top_n)
         st.dataframe(ranking)
         
+        # Section pour générer le bulletin PDF d'un étudiant
+        st.markdown("---")
+        st.subheader("📄 Bulletin individuel")
+        
+        # Sélection de l'étudiant
+        student_options = filtered_df['ID_Etudiant'].unique()
+        
+        if len(student_options) == 0:
+            st.warning("Aucun étudiant ne correspond aux filtres sélectionnés.")
+            return
+        
+        selected_student = st.selectbox(
+            "Sélectionner un étudiant pour générer son bulletin PDF",
+            options=student_options,
+            format_func=lambda x: f"{x} - {filtered_df[filtered_df['ID_Etudiant'] == x]['Nom'].iloc[0] if 'Nom' in filtered_df.columns else x} {filtered_df[filtered_df['ID_Etudiant'] == x]['Prenom'].iloc[0] if 'Prenom' in filtered_df.columns else ''}"
+        )
+        
+        if st.button("📄 Générer et télécharger le bulletin PDF", type="primary"):
+            with st.spinner("Génération du bulletin PDF..."):
+                pdf_data = self.generate_student_report_pdf(selected_student)
+                
+                if pdf_data:
+                    st.success("✅ Bulletin PDF généré avec succès!")
+                    
+                    # Bouton de téléchargement
+                    st.download_button(
+                        label="⬇️ Télécharger le bulletin PDF",
+                        data=pdf_data,
+                        file_name=f"bulletin_{selected_student}.pdf",
+                        mime="application/pdf",
+                        key=f"download_{selected_student}"
+                    )
+                else:
+                    st.error("❌ Impossible de générer le bulletin PDF")
+        
         # Classement des départements
+        st.markdown("---")
         st.subheader("Classement des départements")
-        dept_stats = self.analyzer.compare_groups('Departement')
+        dept_stats = temp_analyzer.compare_groups('Departement')
         dept_stats = dept_stats.sort_values('Moyenne_Finale', ascending=False)
         
         fig = px.bar(dept_stats, x=dept_stats.index, y='Moyenne_Finale',
                     title='Moyenne par département (classement)')
         st.plotly_chart(fig, use_container_width=True)
+    
+    def _show_teachers_tab(self, filtered_df):
+        """Affiche l'onglet des enseignants"""
+        st.header("👨‍🏫 Gestion des enseignants")
+        
+        # Sélection de l'enseignant
+        if 'Enseignant' not in filtered_df.columns:
+            st.error("❌ La colonne 'Enseignant' n'est pas disponible dans les données")
+            return
+        
+        teachers = sorted(filtered_df['Enseignant'].dropna().unique())
+        if len(teachers) == 0:
+            st.warning("Aucun enseignant trouvé dans les données filtrées")
+            return
+        
+        selected_teacher = st.selectbox(
+            "Sélectionner un enseignant",
+            options=teachers,
+            help="Choisissez un enseignant pour voir ses statistiques"
+        )
+        
+        if selected_teacher:
+            # Filtrer les données pour cet enseignant
+            teacher_data = filtered_df[filtered_df['Enseignant'] == selected_teacher]
+            
+            # Informations générales sur l'enseignant
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.metric("Nombre d'étudiants", teacher_data['ID_Etudiant'].nunique())
+            
+            with col2:
+                st.metric("Nombre de matières", teacher_data['Matiere'].nunique())
+            
+            with col3:
+                avg_final = teacher_data['Note_Finale'].mean()
+                st.metric("Moyenne générale", f"{avg_final:.2f}/20")
+            
+            # Liste des matières enseignées
+            st.subheader("📚 Matières enseignées")
+            subjects = teacher_data[['Code_Matiere', 'Matiere', 'Nom_UE']].drop_duplicates()
+            st.dataframe(subjects)
+            
+            # Statistiques par matière
+            st.subheader("📊 Statistiques par matière")
+            subject_stats = teacher_data.groupby(['Code_Matiere', 'Matiere']).agg({
+                'Note_Finale': ['count', 'mean', 'std', 'min', 'max'],
+                'Reussite': 'mean'
+            }).round(2)
+            
+            # Aplatir les colonnes multi-index
+            subject_stats.columns = ['Nombre_étudiants', 'Moyenne', 'Écart_type', 'Note_min', 'Note_max', 'Taux_réussite']
+            subject_stats = subject_stats.reset_index()
+            
+            st.dataframe(subject_stats.style.background_gradient(
+                subset=['Moyenne', 'Taux_réussite'],
+                cmap='YlOrRd'
+            ))
+            
+            # Liste des étudiants
+            st.subheader("👥 Étudiants enseignés")
+            
+            # Grouper par étudiant pour avoir une vue d'ensemble
+            student_summary = teacher_data.groupby(['ID_Etudiant', 'Nom', 'Prenom']).agg({
+                'Note_Finale': ['count', 'mean'],
+                'Reussite': 'mean'
+            }).round(2)
+            
+            student_summary.columns = ['Nombre_matières', 'Moyenne_avec_enseignant', 'Taux_réussite']
+            student_summary = student_summary.reset_index()
+            student_summary = student_summary.sort_values('Moyenne_avec_enseignant', ascending=False)
+            
+            st.dataframe(student_summary)
+            
+            # Graphique des performances des étudiants
+            st.subheader("📈 Distribution des notes")
+            fig = px.histogram(
+                teacher_data, 
+                x='Note_Finale',
+                nbins=20,
+                title=f'Distribution des notes finales - {selected_teacher}',
+                labels={'Note_Finale': 'Note finale'}
+            )
+            st.plotly_chart(fig, use_container_width=True)
     
     def _show_raw_data_tab(self, filtered_df):
         """Affiche les données brutes"""
@@ -592,23 +708,13 @@ class StreamlitDashboard:
             return
         
         # Métriques de qualité
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2 = st.columns(2)
         
         with col1:
             total_rows = len(self.df)
             st.metric("Total lignes", f"{total_rows:,}")
         
         with col2:
-            null_count = self.df.isnull().sum().sum()
-            null_percent = (null_count / (total_rows * len(self.df.columns)) * 100).round(2)
-            st.metric("Valeurs nulles", f"{null_count:,}", f"{null_percent}%")
-        
-        with col3:
-            duplicate_count = self.df.duplicated().sum()
-            duplicate_percent = (duplicate_count / total_rows * 100).round(2)
-            st.metric("Duplicatas", f"{duplicate_count:,}", f"{duplicate_percent}%")
-        
-        with col4:
             student_count = self.df['ID_Etudiant'].nunique()
             st.metric("Étudiants uniques", f"{student_count:,}")
         
@@ -812,6 +918,94 @@ class StreamlitDashboard:
                     
                 except Exception as e:
                     st.error(f"❌ Erreur lors de l'export Excel: {str(e)}")
+
+    def generate_student_report_pdf(self, student_id):
+        """Génère un bulletin PDF pour un étudiant"""
+        try:
+            # Récupérer les données de l'étudiant
+            student_data = self.df[self.df['ID_Etudiant'] == student_id]
+            if student_data.empty:
+                return None
+            
+            # Informations générales de l'étudiant
+            student_info = student_data.iloc[0]
+            
+            # Créer le PDF
+            pdf = FPDF()
+            pdf.add_page()
+            
+            # Police
+            pdf.set_font("Arial", "B", 16)
+            
+            # Titre
+            pdf.cell(0, 10, "Bulletin de Notes - EPL", 0, 1, "C")
+            pdf.ln(10)
+            
+            # Informations de l'étudiant
+            pdf.set_font("Arial", "B", 12)
+            pdf.cell(0, 8, "Informations de l'étudiant", 0, 1)
+            pdf.set_font("Arial", "", 10)
+            
+            pdf.cell(50, 6, f"ID Étudiant: {student_info['ID_Etudiant']}", 0, 1)
+            if 'Nom' in student_info and 'Prenom' in student_info:
+                pdf.cell(50, 6, f"Nom: {student_info['Nom']} {student_info['Prenom']}", 0, 1)
+            if 'Departement' in student_info:
+                pdf.cell(50, 6, f"Département: {student_info['Departement']}", 0, 1)
+            if 'Filière' in student_info:
+                pdf.cell(50, 6, f"Filière: {student_info['Filière']}", 0, 1)
+            if 'Grade' in student_info:
+                pdf.cell(50, 6, f"Grade: {student_info['Grade']}", 0, 1)
+            if 'Annee_etude' in student_info:
+                pdf.cell(50, 6, f"Année d'étude: {student_info['Annee_etude']}", 0, 1)
+            
+            pdf.ln(10)
+            
+            # Statistiques générales
+            pdf.set_font("Arial", "B", 12)
+            pdf.cell(0, 8, "Statistiques générales", 0, 1)
+            pdf.set_font("Arial", "", 10)
+            
+            moyenne_generale = student_data['Note_Finale'].mean()
+            nombre_matieres = len(student_data)
+            taux_reussite = (student_data['Reussite'] == True).mean() * 100
+            
+            pdf.cell(50, 6, f"Moyenne générale: {moyenne_generale:.2f}/20", 0, 1)
+            pdf.cell(50, 6, f"Nombre de matières: {nombre_matieres}", 0, 1)
+        
+            
+            pdf.ln(10)
+            
+            # Détail des notes
+            pdf.set_font("Arial", "B", 12)
+            pdf.cell(0, 8, "Détail des notes par matière", 0, 1)
+            pdf.set_font("Arial", "", 8)
+            
+            # En-têtes du tableau
+            pdf.cell(40, 6, "Matière", 1, 0, "C")
+            pdf.cell(25, 6, "Note Devoir", 1, 0, "C")
+            pdf.cell(25, 6, "Note Examen", 1, 0, "C")
+            pdf.cell(25, 6, "Note Finale", 1, 0, "C")
+            pdf.cell(20, 6, "Réussite", 1, 1, "C")
+            
+            # Données
+            for _, row in student_data.iterrows():
+                matiere = row.get('Matiere', row.get('Code_Matiere', 'N/A'))
+                if len(str(matiere)) > 20:
+                    matiere = str(matiere)[:17] + "..."
+                
+                pdf.cell(40, 6, str(matiere), 1, 0)
+                pdf.cell(25, 6, f"{row.get('Note_Devoir', 'N/A')}", 1, 0, "C")
+                pdf.cell(25, 6, f"{row.get('Note_Examen', 'N/A')}", 1, 0, "C")
+                pdf.cell(25, 6, f"{row.get('Note_Finale', 'N/A')}", 1, 0, "C")
+                pdf.cell(20, 6, "Oui" if row.get('Reussite') else "Non", 1, 1, "C")
+            
+            # Générer le PDF en bytes
+            pdf_output = pdf.output(dest='S').encode('latin1')
+            return pdf_output
+            
+        except Exception as e:
+            st.error(f"Erreur lors de la génération du PDF: {str(e)}")
+            return None
 
 # Point d'entrée pour Streamlit
 def main():

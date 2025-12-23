@@ -37,7 +37,6 @@ streamlit run src/dashboard.py
 
 pip install --upgrade kaleido
 
-
 #### Le fichier data_generator.py
 
 Je génère la structure du dataset

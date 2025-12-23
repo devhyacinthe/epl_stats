@@ -178,7 +178,7 @@ class DataGenerator:
                     self.ue_code_to_name[ue_code] = ue_content[0]  # Premier élément est le nom de l'UE
         
         # Enseignants fictifs
-        self.enseignants = [self.fake.name() for _ in range(30)]
+        self.enseignants = [self.fake.name() for _ in range(700)]
         
         # Coefficients pour calcul de la note finale
         self.coefficient_examen = 0.6  # Examen final compte pour 60%
@@ -189,6 +189,142 @@ class DataGenerator:
         
         # Variables pour le suivi de la distribution
         self.distribution_count = {dept: 0 for dept in self.departements}
+        
+        # Initialiser l'assignation des enseignants aux matières
+        self.setup_teacher_assignments()
+    
+    def setup_teacher_assignments(self):
+        """Configure l'assignation des enseignants aux matières avec contraintes"""
+        # Identifier toutes les matières uniques
+        self.all_matieres = set()
+        for dept, dept_data in self.structure.items():
+            for filiere, ue_dict in dept_data['ue'].items():
+                for ue_code, ue_content in ue_dict.items():
+                    # Ajouter toutes les matières de cette UE (sauf le nom de l'UE)
+                    for matiere in ue_content[1:]:
+                        self.all_matieres.add((dept, filiere, ue_code, matiere))
+        
+        self.all_matieres = list(self.all_matieres)
+        total_matieres = len(self.all_matieres)
+        
+        # Calculer le nombre optimal d'enseignants de manière plus précise
+        max_matieres_per_teacher = 5
+        min_students_per_teacher = 45
+        
+        # Calculer le nombre d'étudiants par filière (estimation basée sur la distribution des départements)
+        students_per_filiere = {}
+        total_students_assigned = 0
+        
+        for dept, prob in self.departement_distribution.items():
+            dept_students = int(self.n_etudiants * prob)
+            filieres_dept = self.structure[dept]['filière']
+            students_per_filiere_dept = dept_students // len(filieres_dept)
+            
+            for filiere in filieres_dept:
+                students_per_filiere[(dept, filiere)] = students_per_filiere_dept
+                total_students_assigned += students_per_filiere_dept
+        
+        # Ajuster pour les étudiants restants
+        remaining_students = self.n_etudiants - total_students_assigned
+        filiere_keys = list(students_per_filiere.keys())
+        for i in range(remaining_students):
+            filiere_key = filiere_keys[i % len(filiere_keys)]
+            students_per_filiere[filiere_key] += 1
+        
+        # Calculer le nombre total de "matière-étudiants"
+        total_matiere_students = 0
+        matiere_students = {}
+        
+        for dept, filiere, ue_code, matiere in self.all_matieres:
+            students_count = students_per_filiere.get((dept, filiere), 0)
+            matiere_students[(dept, filiere, ue_code, matiere)] = students_count
+            total_matiere_students += students_count
+        
+        # Nombre minimum d'enseignants basé sur la contrainte d'étudiants
+        min_teachers_students = int(np.ceil(total_matiere_students / min_students_per_teacher))
+        
+        # Nombre minimum d'enseignants basé sur la contrainte de matières
+        min_teachers_matieres = int(np.ceil(total_matieres / max_matieres_per_teacher))
+        
+        # Le nombre optimal est le maximum des deux contraintes
+        optimal_teachers = max(min_teachers_students, min_teachers_matieres)
+        
+        # S'assurer d'un minimum raisonnable et non nul
+        optimal_teachers = max(optimal_teachers, 30)
+        
+        # Vérification de sécurité : au moins 1 enseignant par matière si nécessaire
+        optimal_teachers = max(optimal_teachers, 1)
+        
+        print(f"📊 Calcul du nombre optimal d'enseignants:")
+        print(f"   Total matières: {total_matieres}")
+        print(f"   Total matière-étudiants: {total_matiere_students}")
+        print(f"   Enseignants min (matières): {min_teachers_matieres}")
+        print(f"   Enseignants min (étudiants): {min_teachers_students}")
+        print(f"   Nombre optimal calculé: {optimal_teachers}")
+        
+        # Ajuster la liste des enseignants
+        if optimal_teachers != len(self.enseignants):
+            print(f"   Ajustement du nombre d'enseignants: {len(self.enseignants)} -> {optimal_teachers}")
+            self.enseignants = [self.fake.name() for _ in range(optimal_teachers)]
+        
+        print(f"   Nombre final d'enseignants: {len(self.enseignants)}")
+        
+        # Vérification de sécurité
+        if len(self.enseignants) == 0:
+            raise ValueError("Erreur: Aucun enseignant disponible après calcul optimal")
+        if total_matieres == 0:
+            raise ValueError("Erreur: Aucune matière trouvée dans la structure")
+        
+        # Distribuer les matières aux enseignants de manière équilibrée
+        self.teacher_matiere_assignments = {teacher: [] for teacher in self.enseignants}
+        
+        # Trier les matières par nombre d'étudiants décroissant (les plus grandes d'abord)
+        matieres_sorted = sorted(self.all_matieres, 
+                               key=lambda m: matiere_students[m], 
+                               reverse=True)
+        
+        for matiere_info in matieres_sorted:
+            # Calculer le score pour chaque enseignant (combinaison de nombre de matières et d'étudiants)
+            teacher_scores = {}
+            for teacher in self.enseignants:
+                current_matieres = len(self.teacher_matiere_assignments[teacher])
+                current_students = sum(matiere_students[m] for m in self.teacher_matiere_assignments[teacher])
+                
+                # Pénaliser les enseignants qui ont déjà 5 matières
+                if current_matieres >= max_matieres_per_teacher:
+                    score = float('inf')
+                else:
+                    # Score = nombre de matières * 1000 + nombre d'étudiants
+                    # Cela favorise l'équilibre entre matières et étudiants
+                    score = current_matieres * 1000 + current_students
+                
+                teacher_scores[teacher] = score
+            
+            # Vérification de sécurité
+            if not teacher_scores:
+                raise ValueError(f"Aucun enseignant disponible pour la matière {matiere_info}")
+            
+            # Vérifier s'il y a au moins un enseignant disponible (score != inf)
+            available_teachers = [t for t, s in teacher_scores.items() if s != float('inf')]
+            if not available_teachers:
+                # Si tous les enseignants ont 5 matières, augmenter temporairement la limite pour cette matière
+                print(f"⚠️  Tous les enseignants ont atteint la limite de 5 matières. Augmentation temporaire pour {matiere_info}")
+                best_teacher = min(teacher_scores.keys(), key=lambda t: teacher_scores[t])
+            else:
+                best_teacher = min(available_teachers, key=lambda t: teacher_scores[t])
+            
+            self.teacher_matiere_assignments[best_teacher].append(matiere_info)
+        
+        # Créer un dictionnaire inverse pour lookup rapide
+        self.matiere_to_teacher = {}
+        for teacher, matieres in self.teacher_matiere_assignments.items():
+            for matiere_info in matieres:
+                self.matiere_to_teacher[matiere_info] = teacher
+    
+    def get_teacher_for_matiere(self, dept, filiere, ue_code, matiere):
+        """Retourne l'enseignant assigné à une matière spécifique"""
+        matiere_key = (dept, filiere, ue_code, matiere)
+        return self.matiere_to_teacher.get(matiere_key, np.random.choice(self.enseignants))
     
     def select_departement(self, student_id, method='mixed'):
         """
@@ -295,10 +431,16 @@ class DataGenerator:
         return dept
     
     def generate_etudiant(self, id_etudiant, method):
-        """Génère un étudiant avec son département selon une distribution aléatoire"""
+        """Génère un étudiant avec son département et sa filière selon une distribution cohérente"""
         dept = self.select_departement(id_etudiant, method)
         grade = np.random.choice(self.structure[dept]['grades'])
-        
+
+        # Assigner la filière de manière déterministe basée sur l'ID étudiant
+        # Cela garantit que les étudiants d'un même département sont répartis de manière cohérente dans les filières
+        filieres_dept = self.structure[dept]['filière']
+        filiere_index = (id_etudiant - 1) % len(filieres_dept)  # Distribution cyclique
+        filiere = filieres_dept[filiere_index]
+
         # Déterminer l'année d'étude basée sur le grade
         annee_mapping = {
             'Licence Fondamentale': np.random.choice([1, 2, 3], p=[0.4, 0.35, 0.25]),
@@ -307,7 +449,7 @@ class DataGenerator:
             'Master': np.random.choice([1, 2], p=[0.6, 0.4]),
             'Doctorat': np.random.choice([1, 2, 3], p=[0.5, 0.3, 0.2])
         }
-        
+
         return {
             'ID_Etudiant': f'ETU{id_etudiant:04d}',
             'Nom': self.fake.last_name(),
@@ -315,6 +457,7 @@ class DataGenerator:
             'Departement': dept,
             'Grade': grade,
             'Annee_etude': annee_mapping.get(grade, 1),
+            'Filière': filiere,  # Ajout de la filière
             'Niveau_Individuel': np.random.normal(0, 5)  # Capacité individuelle
         }
     
@@ -331,7 +474,7 @@ class DataGenerator:
         niveau_indiv = etudiant_info['Niveau_Individuel']
         
         # Base de la note selon l'année et le niveau individuel
-        base_note = 10 - annee_etude * 0.25 + niveau_indiv # Ici on ajuste la note de base selon l'année d'étude et le niveau individuel(plus ton année d'etude est élevée, plus la note de base diminue légèrement)
+        base_note = 13 - annee_etude * 0.25 + niveau_indiv # Ici on ajuste la note de base selon l'année d'étude et le niveau individuel(plus ton année d'etude est élevée, plus la note de base diminue légèrement)
         
         # Ajustement selon la difficulté du département
         difficulte_departement = {
@@ -373,27 +516,31 @@ class DataGenerator:
     def generate_notes_etudiant(self, etudiant_info, nb_ues=5):
         """Génère toutes les notes pour un étudiant"""
         dept = etudiant_info['Departement']
-        filiere = np.random.choice(self.structure[dept]['filière'])
+        filiere = etudiant_info['Filière']  # Utiliser la filière déjà assignée
         notes_data = []
-        
-        # Sélectionner aléatoirement des UE pour cet étudiant
+
+        # Sélectionner les UEs pour cette filière
         ue_dict = self.structure[dept]['ue'][filiere]
         ues_disponibles = list(ue_dict.keys())
-        ues_selectionnees = np.random.choice(ues_disponibles, 
-                                           size=min(nb_ues, len(ues_disponibles)), 
-                                           replace=False)
-        
+
+        # Pour garantir que tous les étudiants d'une même filière ont les mêmes UEs,
+        # on utilise un sous-ensemble fixe des UEs disponibles
+        # On prend les premières UEs disponibles (déterministe)
+        ues_selectionnees = ues_disponibles[:min(nb_ues, len(ues_disponibles))]
+
         for ue_code in ues_selectionnees:
             ue_nom_complet = self.ue_code_to_name[ue_code]
-            
-            # Pour chaque UE, sélectionner 2-3 matières (en excluant le nom de l'UE lui-même)
-            matieres_ue = ue_dict[ue_code][1:]  # Exclure le premier élément (nom de l'UE) (car je considère que le nom de l'UE n'est pas une matière)
-            nb_matieres = np.random.randint(2, min(4, len(matieres_ue) + 1))
-            matieres_selectionnees = np.random.choice(matieres_ue, 
-                                                    size=nb_matieres, 
-                                                    replace=False) #Le replace=False pour éviter la répétition des matières
-            
+
+            # Pour chaque UE, sélectionner les mêmes matières pour tous les étudiants de la filière
+            # On prend toutes les matières disponibles pour cette UE (sauf le nom de l'UE)
+            matieres_ue = ue_dict[ue_code][1:]  # Exclure le premier élément (nom de l'UE)
+            matieres_selectionnees = matieres_ue  # Prendre toutes les matières disponibles
+
             for i, matiere in enumerate(matieres_selectionnees, 1):
+                # Générer les notes pour chaque matière
+                notes_matiere = self.generate_note_matiere(etudiant_info)
+
+                # Générer le code de la matière
                 # Générer les notes pour chaque matière
                 notes_matiere = self.generate_note_matiere(etudiant_info)
                 
@@ -413,7 +560,7 @@ class DataGenerator:
                     'Nom_UE': ue_nom_complet,
                     'Code_Matiere': code_matiere,
                     'Matiere': matiere,
-                    'Enseignant': np.random.choice(self.enseignants),
+                    'Enseignant': self.get_teacher_for_matiere(dept, filiere, ue_code, matiere),
                     'Note_Devoir': notes_matiere['Note_Devoir'],
                     'Note_Examen': notes_matiere['Note_Examen'],
                     'Note_Finale': notes_matiere['Note_Finale'],
@@ -608,7 +755,7 @@ if __name__ == "__main__":
     elif choix == "3":
         df = generator.generate_dataset(method='seasonal')
     else:
-        df = generator.generate_dataset()
+        df = generator.generate_dataset(method='mixed')
     
     # Sauvegarder les données
     generator.save_to_csv(df)
